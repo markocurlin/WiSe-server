@@ -8,6 +8,12 @@ app.get('/', (req, res) => {
     res.json({ "name": 'Marko' });
 });
 
+app.get('/', (req, res) => {
+    console.log(req.data);
+    res.json({ "name": 'Marko' });
+});
+
+
 app.get('/marko', (req, res) => {
     res.json({ "name": 'Marko' });
 });
