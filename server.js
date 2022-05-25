@@ -13,7 +13,8 @@ app.get('/marko', (req, res) => {
 });
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    //origin: 'http://localhost:3000',
+    origin: 'https://wi-se-client.vercel.app/',
     credentials: true
 }));
 
