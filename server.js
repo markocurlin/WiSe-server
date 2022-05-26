@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 app.get('/', (req, res) => {
-    res.json({ "name": 'Marko' });
+    res.json({ "name": 'Marko1234' });
 });
 
 app.get('/marko', (req, res) => {
@@ -14,7 +14,7 @@ app.get('/marko', (req, res) => {
 
 app.use(cors({
     origin: 'https://wi-se-client.vercel.app/',
-    //credentials: true
+    credentials: true
 }));
 
 app.use(bodyParser.urlencoded({
