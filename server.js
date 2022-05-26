@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/marko', (req, res) => {
-    res.json({ "name": 'Marko' });
+    res.json({ "name": 'Aaa' });
 });
 
 app.use(cors({
