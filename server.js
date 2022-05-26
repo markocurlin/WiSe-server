@@ -14,7 +14,7 @@ app.get('/marko', (req, res) => {
 
 app.use(cors({
     origin: 'https://wi-se-client.vercel.app/',
-    credentials: false
+    //credentials: true
 }));
 
 app.use(bodyParser.urlencoded({
