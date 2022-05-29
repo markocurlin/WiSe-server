@@ -13,8 +13,8 @@ app.get('/marko', (req, res) => {
 });
 
 app.use(cors({
-    origin: 'https://wi-se-client.vercel.app/',
-    credentials: true
+    origin: "https://wi-se-client.vercel.app/",
+    credentials: true,
 }));
 
 app.use(bodyParser.urlencoded({
