@@ -4,18 +4,25 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-app.get('/', (req, res) => {
-    res.json({ "name": 'Marko' });
+app.get('/', cors(corsOptions), (req, res) => {
+    res.json({ "name": 'Marko1234' });
 });
 
 app.get('/marko', (req, res) => {
     res.json({ "name": 'Aaa' });
 });
 
+
+var corsOptions = {
+    origin: 'https://wi-se-client.vercel.app/',
+    optionsSuccessStatus: 200
+}
+
+/*
 app.use(cors({
     origin: "https://wi-se-client.vercel.app/",
     credentials: true,
-}));
+}));*/
 
 app.use(bodyParser.urlencoded({
     extended: false
