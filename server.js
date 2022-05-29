@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 app.get('/', (req, res) => {
-    res.json({ "name": 'Marko1234' });
+    res.json({ "name": 'Marko' });
 });
 
 app.get('/marko', (req, res) => {
