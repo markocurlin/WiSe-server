@@ -12,14 +12,10 @@ app.get('/marko', (req, res) => {
     res.json({ "name": 'Aaa' });
 });
 
-/*
 app.use(cors({
     origin: "https://wi-se-client.vercel.app/",
     credentials: true,
 }));
-*/
-
-app.use(cors());
 
 app.use(bodyParser.urlencoded({
     extended: false
