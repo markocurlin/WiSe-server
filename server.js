@@ -15,7 +15,7 @@ app.get('/marko', (req, res) => {
 
 var corsOptions = {
     origin: 'https://wi-se-client.vercel.app/',
-    optionsSuccessStatus: 200
+    
 }
 
 /*
