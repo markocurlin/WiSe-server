@@ -4,8 +4,8 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-//const dataRouter = require('./routes/data');
-
+const dataRouter = require('./routes/data');
+/*
 DATABASE_URL = 'postgres://vaqvtedfomzxdc:d77cc333c761c0314ff96440010f658e4c95e9066c58ffb2460c2d76764f4ed9@ec2-34-242-8-97.eu-west-1.compute.amazonaws.com:5432/dbga6btbrrmhl7';
 
 const { Pool } = require('pg');
@@ -14,7 +14,7 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false
   }
-});
+});*/
 
 app.get('/', cors(corsOptions), (req, res) => {
     res.json({ "name": 'Marko1234' });
@@ -24,6 +24,7 @@ app.get('/marko', (req, res) => {
     res.json({ "name": 'Aaa' });
 });
 
+/*
 app.get('/db', async (req, res) => {
     try {
       const client = await pool.connect();
@@ -37,8 +38,9 @@ app.get('/db', async (req, res) => {
       res.json("Error " + err);
     }
 })
+*/
 
-//app.use('/data', dataRouter);
+app.use('/data', dataRouter);
 
 var corsOptions = {
     origin: 'https://wi-se-client.vercel.app/',
