@@ -4,6 +4,8 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const dataRouter = require('./routes/data');
+
 app.get('/', cors(corsOptions), (req, res) => {
     res.json({ "name": 'Marko1234' });
 });
@@ -12,10 +14,11 @@ app.get('/marko', (req, res) => {
     res.json({ "name": 'Aaa' });
 });
 
+app.use('/data', dataRouter);
 
 var corsOptions = {
     origin: 'https://wi-se-client.vercel.app/',
-    
+    optionsSuccessStatus: 200
 }
 
 /*
