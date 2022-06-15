@@ -11,7 +11,7 @@ app.get('/', cors(corsOptions), (req, res) => {
 });
 
 app.use('/data', dataRouter);
-app.use('/mqtt', mqttRouter);
+//app.use('/mqtt', mqttRouter);
 
 var corsOptions = {
     origin: 'https://wi-se-client.vercel.app/',
