@@ -1,8 +1,11 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 const app = express();
+
 var server = require("http").Server(app); 
-var io = require("socket.io")(server); 
+var io = require("socket.io")(server);
+
+//bez ovo se moze
 server.listen(process.env.PORT || 3000, () => { 
    console.log('listening on *:3000');
 });
@@ -73,4 +76,4 @@ router.get('/', (req, res) => {
   res.json(str);
 })
 
-module.exports = router;
+module.exports = router;*/
