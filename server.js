@@ -93,3 +93,14 @@ client.on('message', function(topic, message) {
   var getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 });
+
+app.get('/mqtt',  (req, res) => {
+    var str = "";
+  
+	for (var i = 0 ; i < globalMQTT.length; i++)
+	{
+		str += globalMQTT.charCodeAt(i).toString() + " ";
+	}
+  
+    res.json(str);
+});
