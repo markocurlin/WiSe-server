@@ -25,7 +25,7 @@ app.use(cors({
 
 
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
 
 app.use(bodyParser.json());
@@ -46,7 +46,7 @@ app.get('/', cors(corsOptions), (req, res) => {
   globalData = str;
   //globalData = transformdata.transformString(str);
   res.json(str);*/
-  res.json("11 22 33 44");
+  res.json("11 22 33 442");
 });
 
 //app.use('/data', dataRouter);
