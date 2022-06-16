@@ -30,12 +30,19 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+/*
 var corsOptions = {
   origin: 'https://wi-se-client.vercel.app/',
   optionsSuccessStatus: 200
 }
+*/
 
-app.use(cors({origin: /\.herokuapp\.com$/}));
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 app.get('/', /*cors(corsOptions),*/ (req, res) => {
   /*var str = "";
@@ -48,7 +55,7 @@ app.get('/', /*cors(corsOptions),*/ (req, res) => {
   globalData = str;
   //globalData = transformdata.transformString(str);
   res.json(str);*/
-  res.json("111 22 33 442");
+  res.json("1 22 33 442");
 });
 
 //app.use('/data', dataRouter);
