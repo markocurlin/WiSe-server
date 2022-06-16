@@ -36,7 +36,7 @@ var corsOptions = {
 }
 
 app.get('/', cors(corsOptions), (req, res) => {
-  var str = "";
+  /*var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
 	{
@@ -45,7 +45,8 @@ app.get('/', cors(corsOptions), (req, res) => {
   
   globalData = str;
   //globalData = transformdata.transformString(str);
-  res.json(str);
+  res.json(str);*/
+  res.json("Marko1234");
 });
 
 //app.use('/data', dataRouter);
