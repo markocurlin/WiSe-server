@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const dataRouter = require('./routes/data');
 //const mqttRouter = require('./routes/mqtt');
 
-app.get('/', /*cors(corsOptions),*/ (req, res) => {
+app.get('/', cors(corsOptions), (req, res) => {
     res.json({ "name": 'Test1234' });
 });
 
@@ -95,12 +95,12 @@ client.on('message', function(topic, message) {
 });
 
 app.get('/mqtt', cors(corsOptions),  (req, res) => {
-    var str = "";
+  var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
 	{
 		str += globalMQTT.charCodeAt(i).toString() + " ";
 	}
   
-    res.json(str);
+  res.json(str);
 });
