@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 const dataRouter = require('./routes/data');
 //const mqttRouter = require('./routes/mqtt');
 
-app.get('/', cors(corsOptions), (req, res) => {
-    res.json({ "name": 'Test' });
+app.get('/', /*cors(corsOptions)*/, (req, res) => {
+    res.json({ "name": 'Test1234' });
 });
 
 app.use('/data', dataRouter);
