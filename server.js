@@ -42,7 +42,7 @@ app.get('/', cors(corsOptions), (req, res) => {
 //app.use('/data', dataRouter);
 //baza podataka
 
-app.get('/data', async (req, res) => {
+app.get('/data', cors(corsOptions), async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM sensordata');
@@ -55,7 +55,7 @@ app.get('/data', async (req, res) => {
   }
 })
 
-app.get('/insertdata', async (req, res) => {
+app.get('/insertdata', cors(corsOptions), async (req, res) => {
   if (globalData.length !== 0) {
   try {
       const client = await pool.connect();
