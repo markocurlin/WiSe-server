@@ -3,11 +3,30 @@ const app = express();
 const port = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const dataRouter = require('./routes/data');
-//const mqttRouter = require('./routes/mqtt');
+//const dataRouter = require('./routes/data');
+
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+DATABASE_URL = 'postgres://vaqvtedfomzxdc:d77cc333c761c0314ff96440010f658e4c95e9066c58ffb2460c2d76764f4ed9@ec2-34-242-8-97.eu-west-1.compute.amazonaws.com:5432/dbga6btbrrmhl7';
+
+var corsOptions = {
+  origin: 'https://wi-se-client.vercel.app/',
+  optionsSuccessStatus: 200
+}
+
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+app.use(bodyParser.json());
 
 app.get('/', cors(corsOptions), (req, res) => {
-  //res.json({ "name": 'Test1234' });
   var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
@@ -19,19 +38,36 @@ app.get('/', cors(corsOptions), (req, res) => {
   res.json(globalData);
 });
 
-app.use('/data', dataRouter);
-//app.use('/mqtt', mqttRouter);
+//app.use('/data', dataRouter);
+//baza podataka
 
-var corsOptions = {
-    origin: 'https://wi-se-client.vercel.app/',
-    optionsSuccessStatus: 200
-}
+app.get('/data', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM sensordata');
+    const results = { 'results': (result) ? result.rows : null};
+    res.json(results);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.json("Error " + err);
+  }
+})
 
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.get('/insertdata', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(1, 1, 1, 1)');
+    //const results = { 'results': (result) ? result.rows : null};
+    res.json(result);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.json("Error " + err);
+  }
+})
 
-app.use(bodyParser.json());
+//
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
