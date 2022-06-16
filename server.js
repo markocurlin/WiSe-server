@@ -94,7 +94,7 @@ client.on('message', function(topic, message) {
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 });
 
-app.get('/mqtt',  (req, res) => {
+app.get('/mqtt', cors(corsOptions),  (req, res) => {
     var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
