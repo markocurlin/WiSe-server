@@ -4,8 +4,8 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 //const dataRouter = require('./routes/data');
-//const transformdata = require('./services/transformdata');
-/*
+const transformdata = require('./services/transformdata');
+
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -15,7 +15,6 @@ const pool = new Pool({
 });
 
 DATABASE_URL = 'postgres://vaqvtedfomzxdc:d77cc333c761c0314ff96440010f658e4c95e9066c58ffb2460c2d76764f4ed9@ec2-34-242-8-97.eu-west-1.compute.amazonaws.com:5432/dbga6btbrrmhl7';
-*/
 
 /*
 app.use(cors({
@@ -23,6 +22,12 @@ app.use(cors({
   credentials: true
 }));*/
 
+/*
+var corsOptions = {
+  origin: 'https://wi-se-client.vercel.app/',
+  optionsSuccessStatus: 200
+}
+*/
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -30,12 +35,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-/*
-var corsOptions = {
-  origin: 'https://wi-se-client.vercel.app/',
-  optionsSuccessStatus: 200
-}
-*/
+//zasad je ovo rjesenje, pitanje dokad???
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -45,22 +45,19 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/', /*cors(corsOptions),*/ (req, res) => {
-  /*var str = "";
+  var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
 	{
 		str += globalMQTT.charCodeAt(i).toString() + " ";
 	}
   
-  globalData = str;
-  //globalData = transformdata.transformString(str);
-  res.json(str);*/
-  res.json("1 22 33 442");
+  globalData = transformdata.transformString(str);
 });
 
 //app.use('/data', dataRouter);
 //baza podataka
-/*
+
 app.get('/data',  async (req, res) => {
   try {
     const client = await pool.connect();
@@ -88,7 +85,7 @@ app.get('/insertdata', async (req, res) => {
     }
   }
 })
-*/
+
 //
 
 app.use((err, req, res, next) => {
@@ -103,7 +100,7 @@ app.listen(port, () => {
 });
 
 //
-/*
+
 var server = require("http").Server(app); 
 var io = require("socket.io")(server);
 
@@ -161,15 +158,3 @@ client.on('message', function(topic, message) {
   var getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 });
-*/
-/*
-app.get('/mqtt', cors(corsOptions),  (req, res) => {
-  var str = "";
-  
-	for (var i = 0 ; i < globalMQTT.length; i++)
-	{
-		str += globalMQTT.charCodeAt(i).toString() + " ";
-	}
-  
-  res.json(str);
-});*/
