@@ -17,10 +17,6 @@ const pool = new Pool({
 DATABASE_URL = 'postgres://vaqvtedfomzxdc:d77cc333c761c0314ff96440010f658e4c95e9066c58ffb2460c2d76764f4ed9@ec2-34-242-8-97.eu-west-1.compute.amazonaws.com:5432/dbga6btbrrmhl7';
 */
 
-var corsOptions = {
-  origin: 'https://wi-se-client.vercel.app/',
-  optionsSuccessStatus: 200
-}
 /*
 app.use(cors({
   origin: 'https://wi-se-client.vercel.app/',
@@ -33,6 +29,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+
+var corsOptions = {
+  origin: 'https://wi-se-client.vercel.app/',
+  optionsSuccessStatus: 200
+}
 
 app.get('/', cors(corsOptions), (req, res) => {
   var str = "";
