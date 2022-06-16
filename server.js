@@ -7,7 +7,15 @@ const dataRouter = require('./routes/data');
 //const mqttRouter = require('./routes/mqtt');
 
 app.get('/', cors(corsOptions), (req, res) => {
-    res.json({ "name": 'Test1234' });
+    //res.json({ "name": 'Test1234' });
+  var str = "";
+  
+	for (var i = 0 ; i < globalMQTT.length; i++)
+	{
+		str += globalMQTT.charCodeAt(i).toString() + " ";
+	}
+  
+  res.json(str);
 });
 
 app.use('/data', dataRouter);
@@ -94,6 +102,7 @@ client.on('message', function(topic, message) {
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 });
 
+/*
 app.get('/mqtt', cors(corsOptions),  (req, res) => {
   var str = "";
   
@@ -103,4 +112,4 @@ app.get('/mqtt', cors(corsOptions),  (req, res) => {
 	}
   
   res.json(str);
-});
+});*/
