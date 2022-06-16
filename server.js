@@ -55,15 +55,17 @@ app.get('/data', async (req, res) => {
 })
 
 app.get('/insertdata', async (req, res) => {
+  if (globalData !== 0) {
   try {
-    const client = await pool.connect();
-    const result = await client.query('INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(1, 1, 1, 1)');
-    //const results = { 'results': (result) ? result.rows : null};
-    res.json(result);
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.json("Error " + err);
+      const client = await pool.connect();
+      const result = await client.query('INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(1, 1, 1, 1)');
+      //const results = { 'results': (result) ? result.rows : null};
+      res.json(result);
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.json("Error " + err);
+    }
   }
 })
 
