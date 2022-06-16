@@ -45,7 +45,7 @@ app.get('/', cors(corsOptions), (req, res) => {
   
   globalData = str;
   //globalData = transformdata.transformString(str);
-  res.json(globalData);
+  res.json(str);
 });
 
 //app.use('/data', dataRouter);
