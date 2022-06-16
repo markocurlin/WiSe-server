@@ -7,7 +7,7 @@ const dataRouter = require('./routes/data');
 //const mqttRouter = require('./routes/mqtt');
 
 app.get('/', cors(corsOptions), (req, res) => {
-    //res.json({ "name": 'Test1234' });
+  //res.json({ "name": 'Test1234' });
   var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
@@ -15,7 +15,8 @@ app.get('/', cors(corsOptions), (req, res) => {
 		str += globalMQTT.charCodeAt(i).toString() + " ";
 	}
   
-  res.json(str);
+  globalData = str;
+  res.json(globalData);
 });
 
 app.use('/data', dataRouter);
@@ -66,6 +67,7 @@ var client = mqtt.connect('https://eu1.cloud.thethings.network',options);
 
 // Global variable to save data
 var globalMQTT = 0;
+var globalData = '';
 
 io.on("connection", function(socket)
 {
