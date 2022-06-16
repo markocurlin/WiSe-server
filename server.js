@@ -4,6 +4,7 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 //const dataRouter = require('./routes/data');
+const transformdata = require('./services/transformdata');
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -34,7 +35,7 @@ app.get('/', cors(corsOptions), (req, res) => {
 		str += globalMQTT.charCodeAt(i).toString() + " ";
 	}
   
-  globalData = str;
+  globalData = transformdata.transformString(str);
   res.json(globalData);
 });
 
@@ -55,10 +56,10 @@ app.get('/data', async (req, res) => {
 })
 
 app.get('/insertdata', async (req, res) => {
-  if (globalData !== 0) {
+  if (globalData.length !== 0) {
   try {
       const client = await pool.connect();
-      const result = await client.query('INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(1, 1, 1, 1)');
+      const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
       //const results = { 'results': (result) ? result.rows : null};
       res.json(result);
       client.release();
