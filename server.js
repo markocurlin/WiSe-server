@@ -57,7 +57,7 @@ app.get('/', /*cors(corsOptions),*/ (req, res) => {
 
 //app.use('/data', dataRouter);
 //baza podataka
-
+/*
 app.get('/data',  async (req, res) => {
   try {
     const client = await pool.connect();
@@ -85,7 +85,7 @@ app.get('/insertdata', async (req, res) => {
     }
   }
 })
-
+*/
 //
 
 app.use((err, req, res, next) => {
