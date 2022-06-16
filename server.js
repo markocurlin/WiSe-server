@@ -35,7 +35,9 @@ var corsOptions = {
   optionsSuccessStatus: 200
 }
 
-app.get('/', cors(corsOptions), (req, res) => {
+app.use(cors({origin: /\.herokuapp\.com$/}));
+
+app.get('/', /*cors(corsOptions),*/ (req, res) => {
   /*var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
