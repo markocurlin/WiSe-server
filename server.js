@@ -45,15 +45,15 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/', /*cors(corsOptions),*/ (req, res) => {
-  /*var str = '';
+  var str = '';
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
 	{
 		str += globalMQTT.charCodeAt(i).toString() + " ";
 	}
   
-  globalData = transformdata.transformString(str);*/
-  res.json('13 14 15 17');
+  globalData = transformdata.transformString(str);
+  //res.json('13 14 15 17');
 });
 
 //app.use('/data', dataRouter);
