@@ -46,7 +46,7 @@ app.all('*', function(req, res, next) {
 
 let globalData = '';
 
-app.get('/', /*cors(corsOptions),*/ (req, res) => {
+app.get('/', /*cors(corsOptions),*/ async (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
 
