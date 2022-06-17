@@ -52,7 +52,15 @@ app.get('/',  async (req, res) => {
   globalData = transformdata.transformString(temp);
 
   if (globalData.length !== 0) {
-    res.json(globalData);
+    try {
+      const client = await pool.connect();
+      const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
+      res.json(globalData);
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.json("Error " + err);
+    }
   }
   //res.json(globalData);
   //res.json('13 14 15 17');
