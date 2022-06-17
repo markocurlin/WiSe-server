@@ -65,7 +65,7 @@ app.get('/', /*cors(corsOptions),*/ (req, res) => {
 app.post('/data',  async (req, res) => {
   try {
     const data = req.body;
-
+    res.json(data);
     if (data) {
       const client = await pool.connect();
       //const result = await client.query('SELECT * FROM sensordata');
