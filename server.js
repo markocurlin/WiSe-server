@@ -101,7 +101,7 @@ app.listen(port, () => {
 });
 
 //
-/*
+
 var server = require("http").Server(app); 
 var io = require("socket.io")(server);
 
@@ -118,7 +118,7 @@ var options = {
     clean: true,
     encoding: 'utf8'
 };
-
+/*
 var client = mqtt.connect('https://eu1.cloud.thethings.network',options);
 
 // Global variable to save data
