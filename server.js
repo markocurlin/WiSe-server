@@ -45,8 +45,21 @@ app.all('*', function(req, res, next) {
 });
 
 let globalData = '';
+/*cors(corsOptions),*/
 
-app.get('/', /*cors(corsOptions),*/ async (req, res) => {
+app.get('/',  async (req, res) => {
+  const temp = transformdata.transformHexToDec(globalMQTT);
+  globalData = transformdata.transformString(temp);
+
+  if (globalData.length !== 0) {
+    res.json(globalData);
+  }
+  //res.json(globalData);
+  //res.json('13 14 15 17');
+});
+
+/*
+app.get('/',  async (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
 
@@ -65,7 +78,7 @@ app.get('/', /*cors(corsOptions),*/ async (req, res) => {
   //res.json(globalData);
   //res.json('13 14 15 17');
 });
-
+*/
 //app.use('/data', dataRouter);
 //baza podataka
 
