@@ -62,6 +62,24 @@ app.get('/', /*cors(corsOptions),*/ (req, res) => {
 //app.use('/data', dataRouter);
 //baza podataka
 
+app.post('/data',  async (req, res) => {
+  try {
+    const data = req.body;
+
+    if (data) {
+      const client = await pool.connect();
+      const result = await client.query('SELECT * FROM sensordata');
+      const results = { 'results': (result) ? result.rows : null};
+      res.json(results);
+      client.release();
+    }
+  } catch (err) {
+    console.error(err);
+    res.json("Error " + err);
+  }
+})
+
+/*
 app.get('/data',  async (req, res) => {
   try {
     const client = await pool.connect();
@@ -74,6 +92,7 @@ app.get('/data',  async (req, res) => {
     res.json("Error " + err);
   }
 })
+*/
 /*
 app.get('/insertdata', async (req, res) => {
   if (globalData.length !== 0) {
