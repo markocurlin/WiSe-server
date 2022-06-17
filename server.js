@@ -45,7 +45,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/', /*cors(corsOptions),*/ (req, res) => {
-  /*var str = "";
+  /*var str = '';
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
 	{
@@ -118,7 +118,7 @@ var options = {
     clean: true,
     encoding: 'utf8'
 };
-/*
+
 var client = mqtt.connect('https://eu1.cloud.thethings.network',options);
 
 // Global variable to save data
@@ -159,4 +159,3 @@ client.on('message', function(topic, message) {
   var getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 });
-*/
