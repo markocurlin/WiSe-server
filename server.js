@@ -47,15 +47,22 @@ app.all('*', function(req, res, next) {
 let globalData = '';
 
 app.get('/', /*cors(corsOptions),*/ (req, res) => {
-  var str = '';
-  
-	for (var i = 0 ; i < globalMQTT.length; i++)
-	{
-		str += globalMQTT.charCodeAt(i).toString() + " ";
-	}
-  
-  globalData = transformdata.transformString(str);
-  res.json(globalData);
+  const temp = transformdata.transformHexToDec(globalMQTT);
+  globalData = transformdata.transformString(temp);
+
+  if (globalData.length !== 0) {
+    try {
+        const client = await pool.connect();
+        const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
+        //const results = { 'results': (result) ? result.rows : null};
+        res.json(globalData);
+        client.release();
+      } catch (err) {
+        console.error(err);
+        res.json("Error " + err);
+      }
+    }
+  //res.json(globalData);
   //res.json('13 14 15 17');
 });
 
