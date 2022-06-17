@@ -68,7 +68,8 @@ app.post('/data',  async (req, res) => {
 
     if (data) {
       const client = await pool.connect();
-      const result = await client.query('SELECT * FROM sensordata');
+      //const result = await client.query('SELECT * FROM sensordata');
+      const result = await client.query(`SELECT ${data} FROM sensordata`);
       //const results = { 'results': (result) ? result.rows : null};
       const results = (result) ? result.rows : null;
       res.json(results);
