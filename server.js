@@ -45,14 +45,15 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/', /*cors(corsOptions),*/ (req, res) => {
-  var str = "";
+  /*var str = "";
   
 	for (var i = 0 ; i < globalMQTT.length; i++)
 	{
 		str += globalMQTT.charCodeAt(i).toString() + " ";
 	}
   
-  globalData = transformdata.transformString(str);
+  globalData = transformdata.transformString(str);*/
+  res.json('13 14 15 17');
 });
 
 //app.use('/data', dataRouter);
@@ -100,7 +101,7 @@ app.listen(port, () => {
 });
 
 //
-
+/*
 var server = require("http").Server(app); 
 var io = require("socket.io")(server);
 
@@ -158,3 +159,4 @@ client.on('message', function(topic, message) {
   var getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 });
+*/
