@@ -44,6 +44,8 @@ app.all('*', function(req, res, next) {
   next();
 });
 
+let globalData = '';
+
 app.get('/', /*cors(corsOptions),*/ (req, res) => {
   var str = '';
   
@@ -53,6 +55,7 @@ app.get('/', /*cors(corsOptions),*/ (req, res) => {
 	}
   
   globalData = transformdata.transformString(str);
+  res.json(globalData);
   //res.json('13 14 15 17');
 });
 
@@ -123,7 +126,6 @@ var client = mqtt.connect('https://eu1.cloud.thethings.network',options);
 
 // Global variable to save data
 var globalMQTT = 0;
-var globalData = '';
 
 io.on("connection", function(socket)
 {
