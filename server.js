@@ -82,20 +82,6 @@ app.post('/data',  async (req, res) => {
 })
 
 /*
-app.get('/data',  async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT * FROM sensordata');
-    const results = { 'results': (result) ? result.rows : null};
-    res.json(results);
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.json("Error " + err);
-  }
-})
-*/
-/*
 app.get('/insertdata', async (req, res) => {
   if (globalData.length !== 0) {
   try {
