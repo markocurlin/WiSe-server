@@ -37,11 +37,8 @@ app.get('/', (req, res) => {
   if (globalData.length !== 0) {
     res.json(globalData);
   }
-  res.json(globalData);
-  //res.json('13 14 15 17');
+  //res.json(globalData);
 });
-
-//app.use('/data', dataRouter);
 
 app.post('/data',  async (req, res) => {
   try {
