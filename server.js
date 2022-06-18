@@ -34,10 +34,7 @@ app.get('/', (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
 
-  if (globalData.length !== 0) {
-    res.json(globalData);
-  }
-  //res.json(globalData);
+  res.json(globalData);
 });
 
 app.post('/data',  async (req, res) => {
@@ -109,7 +106,6 @@ io.on("connection", function(socket)
   setInterval(intervalFunc, 2000);
 });
 
-// MQTT setup
 client.on('connect', function() {
   console.log('Client connected to TTN')
   client.subscribe('#')
