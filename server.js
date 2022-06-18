@@ -46,29 +46,26 @@ app.all('*', function(req, res, next) {
 
 let globalData = '';
 
-const temp = transformdata.transformHexToDec(globalMQTT);
-globalData = transformdata.transformString(temp);
-
 /*cors(corsOptions),*/
-
-app.get('/',  async (req, res) => {
-  //const temp = transformdata.transformHexToDec(globalMQTT);
-  //globalData = transformdata.transformString(temp);
 /*
+app.get('/',  async (req, res) => {
+  const temp = transformdata.transformHexToDec(globalMQTT);
+  globalData = transformdata.transformString(temp);
+
   if (globalData.length !== 0) {
     res.json(globalData);
-  }*/
+  }
   res.json(globalData);
   //res.json('13 14 15 17');
-});
-/*
+});*/
+
 app.get('/',  async (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
 
   try {
     const client = await pool.connect();
-    const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
+    //const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
     res.json(globalData);
     client.release();
   } catch (err) {
@@ -76,7 +73,7 @@ app.get('/',  async (req, res) => {
     res.json("Error " + err);
   }
 });
-*/
+
 //app.use('/data', dataRouter);
 //baza podataka
 
