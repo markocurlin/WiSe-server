@@ -80,7 +80,7 @@ app.post('/data',  async (req, res) => {
   }
 })
 
-/*
+
 app.get('/insertdata', async (req, res) => {
   if (globalData.length !== 0) {
   try {
@@ -95,7 +95,7 @@ app.get('/insertdata', async (req, res) => {
     }
   }
 })
-*/
+
 //
 
 app.use((err, req, res, next) => {
