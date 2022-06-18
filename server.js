@@ -47,7 +47,7 @@ app.all('*', function(req, res, next) {
 let globalData = '';
 
 /*cors(corsOptions),*/
-
+/*
 app.get('/', (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
@@ -56,6 +56,28 @@ app.get('/', (req, res) => {
     res.json(globalData);
   }
   res.json(globalData);
+  //res.json('13 14 15 17');
+});
+*/
+
+app.get('/', (req, res) => {
+  const temp = transformdata.transformHexToDec(globalMQTT);
+  globalData = transformdata.transformString(temp);
+
+  if (globalData.length === 4) {
+    try {
+      client = await pool.connect();
+      const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
+      //const results = { 'results': (result) ? result.rows : null};
+      res.json(globalData);
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.json("Error " + err);
+    }
+  } else {
+    res.json(globalData);
+  }
   //res.json('13 14 15 17');
 });
 
@@ -78,7 +100,7 @@ app.post('/data',  async (req, res) => {
     res.json("Error " + err);
   }
 })
-
+/*
 app.get('/insertdata', async (req, res) => {
   if (globalData.length === 4) {
     try {
@@ -95,7 +117,7 @@ app.get('/insertdata', async (req, res) => {
     res.json(globalData.length)
   }
 });
-
+*/
 //
 
 app.use((err, req, res, next) => {
