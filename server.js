@@ -61,10 +61,6 @@ app.get('/',  async (req, res) => {
 app.get('/',  async (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
-/*
-  if (globalData.length !== 0) {
-    res.json(globalData);
-  }*/
 
   try {
     const client = await pool.connect();
@@ -75,9 +71,6 @@ app.get('/',  async (req, res) => {
     console.error(err);
     res.json("Error " + err);
   }
-
-  //res.json(globalData);
-  //res.json('13 14 15 17');
 });
 
 //app.use('/data', dataRouter);
