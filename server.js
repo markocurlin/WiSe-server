@@ -3,7 +3,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
-//const dataRouter = require('./routes/data');
 const transformdata = require('./services/transformdata');
 
 const { Pool } = require('pg');
@@ -16,26 +15,11 @@ const pool = new Pool({
 
 DATABASE_URL = 'postgres://vaqvtedfomzxdc:d77cc333c761c0314ff96440010f658e4c95e9066c58ffb2460c2d76764f4ed9@ec2-34-242-8-97.eu-west-1.compute.amazonaws.com:5432/dbga6btbrrmhl7';
 
-/*
-app.use(cors({
-  origin: 'https://wi-se-client.vercel.app/',
-  credentials: true
-}));*/
-
-/*
-var corsOptions = {
-  origin: 'https://wi-se-client.vercel.app/',
-  optionsSuccessStatus: 200
-}
-*/
-
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
 app.use(bodyParser.json());
-
-//zasad je ovo rjesenje, pitanje dokad???
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -45,8 +29,6 @@ app.all('*', function(req, res, next) {
 });
 
 let globalData = '';
-
-/*cors(corsOptions),*/
 
 app.get('/', (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
@@ -60,7 +42,6 @@ app.get('/', (req, res) => {
 });
 
 //app.use('/data', dataRouter);
-//baza podataka
 
 app.post('/data',  async (req, res) => {
   try {
@@ -78,25 +59,6 @@ app.post('/data',  async (req, res) => {
     res.json("Error " + err);
   }
 })
-/*
-app.get('/insertdata', async (req, res) => {
-  if (globalData.length === 4) {
-    try {
-      client = await pool.connect();
-      const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
-      //const results = { 'results': (result) ? result.rows : null};
-      res.json(result);
-      client.release();
-    } catch (err) {
-      console.error(err);
-      res.json("Error " + err);
-    }
-  } else {
-    res.json(globalData.length)
-  }
-});
-*/
-//
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
@@ -111,11 +73,11 @@ app.listen(port, () => {
 
 //
 
-var server = require("http").Server(app); 
-var io = require("socket.io")(server);
+let server = require("http").Server(app); 
+let io = require("socket.io")(server);
 
-var mqtt = require('mqtt');
-var options = {
+let mqtt = require('mqtt');
+let options = {
     port: 1883,
     clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8),
     username: 'pametni-vrt@ttn',
@@ -128,10 +90,9 @@ var options = {
     encoding: 'utf8'
 };
 
-var client = mqtt.connect('https://eu1.cloud.thethings.network',options);
+let client = mqtt.connect('https://eu1.cloud.thethings.network',options);
 
-// Global variable to save data
-var globalMQTT = 0;
+let globalMQTT = 0;
 
 io.on("connection", function(socket)
 {
@@ -179,9 +140,9 @@ async function storeToDatabase(dataMQTT) {
 }
 
 client.on('message', function(topic, message) {
-  var getDataFromTTN = JSON.parse(message);
+  let getDataFromTTN = JSON.parse(message);
   console.log("Data from TTN: ", getDataFromTTN.uplink_message.frm_payload);
-  var getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
+  let getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 
   storeToDatabase(globalMQTT);
