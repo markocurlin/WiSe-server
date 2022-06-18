@@ -47,7 +47,7 @@ app.all('*', function(req, res, next) {
 let globalData = '';
 
 /*cors(corsOptions),*/
-/*
+
 app.get('/', (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
@@ -58,28 +58,7 @@ app.get('/', (req, res) => {
   res.json(globalData);
   //res.json('13 14 15 17');
 });
-*/
 
-app.get('/', async (req, res) => {
-  const temp = transformdata.transformHexToDec(globalMQTT);
-  globalData = transformdata.transformString(temp);
-
-  if (globalData.length === 4) {
-    try {
-      client = await pool.connect();
-      const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
-      //const results = { 'results': (result) ? result.rows : null};
-      res.json(globalData);
-      client.release();
-    } catch (err) {
-      console.error(err);
-      res.json("Error " + err);
-    }
-  } else {
-    res.json(globalData);
-  }
-  //res.json('13 14 15 17');
-});
 
 //app.use('/data', dataRouter);
 //baza podataka
