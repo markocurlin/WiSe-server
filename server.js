@@ -91,6 +91,8 @@ app.get('/insertdata', async (req, res) => {
       console.error(err);
       res.json("Error " + err);
     }
+  } else {
+    res.json(globalData.length)
   }
 });
 
