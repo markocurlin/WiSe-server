@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
 });
 */
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   const temp = transformdata.transformHexToDec(globalMQTT);
   globalData = transformdata.transformString(temp);
 
