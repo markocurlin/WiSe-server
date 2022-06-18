@@ -45,11 +45,15 @@ app.all('*', function(req, res, next) {
 });
 
 let globalData = '';
+
+const temp = transformdata.transformHexToDec(globalMQTT);
+globalData = transformdata.transformString(temp);
+
 /*cors(corsOptions),*/
 
 app.get('/',  async (req, res) => {
-  const temp = transformdata.transformHexToDec(globalMQTT);
-  globalData = transformdata.transformString(temp);
+  //const temp = transformdata.transformHexToDec(globalMQTT);
+  //globalData = transformdata.transformString(temp);
 /*
   if (globalData.length !== 0) {
     res.json(globalData);
