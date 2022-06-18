@@ -49,8 +49,8 @@ let globalData = '';
 /*cors(corsOptions),*/
 
 app.get('/', (req, res) => {
-  const temp = transformdata.transformHexToDec(globalMQTT);
-  globalData = transformdata.transformString(temp);
+  //const temp = transformdata.transformHexToDec(globalMQTT);
+  //globalData = transformdata.transformString(temp);
 
   if (globalData.length !== 0) {
     res.json(globalData);
@@ -58,7 +58,6 @@ app.get('/', (req, res) => {
   res.json(globalData);
   //res.json('13 14 15 17');
 });
-
 
 //app.use('/data', dataRouter);
 //baza podataka
@@ -167,4 +166,13 @@ client.on('message', function(topic, message) {
   console.log("Data from TTN: ", getDataFromTTN.uplink_message.frm_payload);
   var getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
+
+  const temp = transformdata.transformHexToDec(globalMQTT);
+  globalData = transformdata.transformString(temp);
+/*
+  client = await pool.connect();
+  const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
+  //const results = { 'results': (result) ? result.rows : null};
+  res.json(result);
+  client.release();*/
 });
