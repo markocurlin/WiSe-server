@@ -79,31 +79,14 @@ app.post('/data',  async (req, res) => {
   }
 })
 
-app.post('/insertdata',  async (req, res) => {
-  try {
-    const data = req.body;
-    
-    if (data) {
-      const client = await pool.connect();
-      //const result = await client.query(`SELECT ${data.param} AS paramname FROM sensordata`);
-      //const results = (result) ? result.rows : null;
-      res.json(data);
-      client.release();
-    }
-  } catch (err) {
-    console.error(err);
-    res.json("Error " + err);
-  }
-})
 
-/*
-app.post('/insertdata', async (req, res) => {
-  if (globalData.length !== 0) {
+app.get('/insertdata', async (req, res) => {
+  if (globalData.length === 4) {
   try {
       const client = await pool.connect();
-      //const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
+      const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
       //const results = { 'results': (result) ? result.rows : null};
-      //res.json(result);
+      res.json(result);
       client.release();
     } catch (err) {
       console.error(err);
@@ -111,7 +94,7 @@ app.post('/insertdata', async (req, res) => {
     }
   }
 })
-*/
+
 //
 
 app.use((err, req, res, next) => {
