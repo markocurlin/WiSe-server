@@ -79,7 +79,7 @@ app.post('/data',  async (req, res) => {
   }
 })
 
-app.post('/insertdata', async (req, res) => {
+app.get('/insertdata', async (req, res) => {
   if (globalData.length === 4) {
     try {
       client = await pool.connect();
