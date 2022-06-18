@@ -161,18 +161,28 @@ client.on('error', function(err) {
   console.log(err);
 });
 
+async function storeToDatabase(dataMQTT) {
+  const temp = transformdata.transformHexToDec(dataMQTT);
+  const notGlobalData = transformdata.transformString(temp);
+
+  if (notGlobalData.length === 4) {
+    try {
+      client = await pool.connect();
+      const result = await client.query(
+        `INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${notGlobalData[0]}, ${notGlobalData[1]}, ${notGlobalData[2]}, ${notGlobalData[3]})`
+      );
+      client.release();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
 client.on('message', function(topic, message) {
   var getDataFromTTN = JSON.parse(message);
   console.log("Data from TTN: ", getDataFromTTN.uplink_message.frm_payload);
   var getFrmPayload = getDataFromTTN.uplink_message.frm_payload;
   globalMQTT = Buffer.from(getFrmPayload, 'base64').toString();
 
-  const temp = transformdata.transformHexToDec(globalMQTT);
-  globalData = transformdata.transformString(temp);
-/*
-  client = await pool.connect();
-  const result = await client.query(`INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${globalData[0]}, ${globalData[1]}, ${globalData[2]}, ${globalData[3]})`);
-  //const results = { 'results': (result) ? result.rows : null};
-  res.json(result);
-  client.release();*/
+  storeToDatabase(globalMQTT);
 });
