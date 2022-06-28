@@ -133,8 +133,6 @@ async function storeToDatabase(dataMQTT) {
   }
 }
 
-//
-
 client.on('message', function(topic, message) {
   let getDataFromTTN = JSON.parse(message);
   console.log("Data from TTN: ", getDataFromTTN.uplink_message.frm_payload);
