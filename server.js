@@ -123,7 +123,8 @@ async function storeToDatabase(dataMQTT) {
     try {
       client = await pool.connect();
       const result = await client.query(
-        `INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${notGlobalData[0]}, ${notGlobalData[1]}, ${notGlobalData[2]}, ${notGlobalData[3]})`
+        `INSERT INTO sensordata(temperature, humidityair, lux, humiditysoil)VALUES(${notGlobalData[0]}, ${notGlobalData[1]}, ${notGlobalData[2]}, ${notGlobalData[3]}
+          )`
       );
       client.release();
     } catch (err) {
